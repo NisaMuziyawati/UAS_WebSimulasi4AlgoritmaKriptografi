@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Web Simulasi 4 Algoritma Kriptografi</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<canvas id="bitRain"></canvas>
+<div class="bitfield"></div>
+
+<div class="topbar">
+  <a href="index.html" class="brand">
+    <span class="mark">CL</span>
+    <span>CryptoLab<small>Kriptografi Simetris — UAS</small></span>
+  </a>
+  <nav class="navlinks">
+    <a href="index.html" class="active">Beranda</a>
+    <a href="des.html">DES</a>
+    <a href="sdes.html">S-DES</a>
+    <a href="aes.html">AES</a>
+    <a href="saes.html">S-AES</a>
+  </nav>
+</div>
+
+<main>
+  <section class="hero">
+    <div>
+      <span class="eyebrow"><span class="dot"></span> 4 Algoritma · Step-by-Step</span>
+      <h1>Bongkar setiap bit, <span class="accent">bukan cuma hasil akhirnya.</span></h1>
+      <p class="lede">CryptoLab adalah laboratorium simulasi untuk empat algoritma kunci-simetris klasik: DES,
+      S-DES, AES, dan S-AES. Setiap modul menampilkan seluruh proses komputasi — mulai dari pembentukan
+      subkey hingga ronde terakhir — sehingga hasil program dapat diverifikasi langsung terhadap
+      perhitungan manual.</p>
+      <div class="cta-row">
+        <a href="sdes.html" class="btn btn-primary">Mulai dari S-DES →</a>
+        <a href="des.html" class="btn btn-ghost">Lihat modul DES</a>
+      </div>
+    </div>
+
+    <div class="cipher-strip">
+      <div class="row" id="stripRow1"></div>
+      <div class="row" id="stripRow2"></div>
+      <div class="row" id="stripRow3"></div>
+      <div class="caption">P ⊕ K → S-Box → Permutasi → C &nbsp;·&nbsp; live bit demo</div>
+    </div>
+  </section>
+
+  <section class="modules">
+    <div class="section-head">
+      <div>
+        <h2>Empat modul, satu alur kerja yang sama</h2>
+        <p>Input → mode Enkripsi/Dekripsi → Submit → hasil ringkas → detail penyelesaian lengkap.</p>
+      </div>
+    </div>
+
+    <div class="grid-cards">
+      <a href="des.html" class="card" data-c="amber">
+        <span class="tag">Blok 64-bit</span>
+        <h3>DES</h3>
+        <p>Data Encryption Standard penuh: 16 ronde Feistel, 8 S-Box, dan key schedule 16 subkey.</p>
+        <div class="specs">
+          <span class="spec">64-bit blok</span>
+          <span class="spec">64-bit key</span>
+          <span class="spec">16 ronde</span>
+        </div>
+        <div class="go">Buka simulasi →</div>
+      </a>
+
+      <a href="sdes.html" class="card" data-c="cyan">
+        <span class="tag">Blok 8-bit · Edukatif</span>
+        <h3>S-DES</h3>
+        <p>Versi sederhana DES untuk memahami fk, switch function, dan S-Box S0/S1 langkah demi langkah.</p>
+        <div class="specs">
+          <span class="spec">8-bit blok</span>
+          <span class="spec">10-bit key</span>
+          <span class="spec">2 ronde</span>
+        </div>
+        <div class="go">Buka simulasi →</div>
+      </a>
+
+      <a href="aes.html" class="card" data-c="violet">
+        <span class="tag">Blok 128-bit</span>
+        <h3>AES-128</h3>
+        <p>SubBytes, ShiftRows, MixColumns, AddRoundKey — 10 ronde penuh dengan state matriks 4×4.</p>
+        <div class="specs">
+          <span class="spec">128-bit blok</span>
+          <span class="spec">128-bit key</span>
+          <span class="spec">10 ronde</span>
+        </div>
+        <div class="go">Buka simulasi →</div>
+      </a>
+
+      <a href="saes.html" class="card" data-c="red">
+        <span class="tag">Blok 16-bit · Edukatif</span>
+        <h3>S-AES</h3>
+        <p>Versi sederhana AES dengan nibble S-Box, MixColumns pada GF(16), dan state 2×2.</p>
+        <div class="specs">
+          <span class="spec">16-bit blok</span>
+          <span class="spec">16-bit key</span>
+          <span class="spec">2 ronde</span>
+        </div>
+        <div class="go">Buka simulasi →</div>
+      </a>
+    </div>
+  </section>
+
+  <section class="steps-section">
+    <div class="section-head">
+      <div>
+        <span class="eyebrow"><span class="dot"></span> Cara Pakai</span>
+        <h2>Alur kerja di setiap modul</h2>
+        <p>Alur yang sama di keempat modul, supaya perpindahan antar algoritma terasa familiar.</p>
+      </div>
+    </div>
+    <div class="steps-grid">
+      <div class="step-card">
+        <span class="step-eyebrow">Langkah 1</span>
+        <h4>Isi input</h4>
+        <p>Masukkan plaintext/ciphertext dan key sesuai panjang bit algoritma (biner atau hex), lalu pilih mode Enkripsi atau Dekripsi.</p>
+      </div>
+      <div class="step-card">
+        <span class="step-eyebrow">Langkah 2</span>
+        <h4>Submit &amp; proses</h4>
+        <p>Tekan tombol Submit. Aplikasi menjalankan seluruh tahapan algoritma secara nyata di browser — bukan simulasi tampilan semata.</p>
+      </div>
+      <div class="step-card">
+        <span class="step-eyebrow">Langkah 3</span>
+        <h4>Lihat hasil</h4>
+        <p>Hasil akhir ditampilkan dalam kotak bit/nibble/byte yang jelas, lengkap dengan daftar subkey yang terbentuk.</p>
+      </div>
+      <div class="step-card">
+        <span class="step-eyebrow">Langkah 4</span>
+        <h4>Verifikasi</h4>
+        <p>Klik "Tampilkan Solusi Penyelesaian" untuk membuka seluruh tahapan — key generation, permutasi, substitusi, hingga XOR tiap ronde — dan bandingkan dengan perhitungan manual.</p>
+      </div>
+    </div>
+  </section>
+</main>
+
+<div class="footer">Dibangun Untuk Ulangan Akhir Semester Mata Kuliah Kriptografi · Perancangan dan Implementasi Web Simulasi 4 Algoritma Kriptografi: DES, S-DES, AES, dan S-AES</div>
+
+<script>
+  // falling bit rain — subtle matrix-style background
+  (function(){
+    const canvas = document.getElementById('bitRain');
+    const ctx = canvas.getContext('2d');
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    let cols, drops, fontSize = 15;
+
+    function resize(){
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+      cols = Math.floor(canvas.width / fontSize);
+      drops = new Array(cols).fill(0).map(() => Math.random() * -100);
+    }
+    resize();
+    window.addEventListener('resize', resize);
+
+    const amber = 'rgba(232,163,61,';
+    const cyan  = 'rgba(79,209,197,';
+
+    function draw(){
+      ctx.fillStyle = 'rgba(11,15,20,0.09)';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      ctx.font = fontSize + 'px "JetBrains Mono", monospace';
+
+      for (let i = 0; i < cols; i++){
+        const char = Math.random() > 0.5 ? '1' : '0';
+        const x = i * fontSize;
+        const y = drops[i] * fontSize;
+        const color = Math.random() > 0.82 ? amber : cyan;
+        const alpha = Math.random() * 0.5 + 0.15;
+        ctx.fillStyle = color + alpha + ')';
+        ctx.fillText(char, x, y);
+
+        if (y > canvas.height && Math.random() > 0.975) drops[i] = 0;
+        drops[i]++;
+      }
+    }
+
+    if (!reduceMotion){
+      setInterval(draw, 55);
+    }
+  })();
+
+  // ambient hero bit animation
+  const rows = ['stripRow1','stripRow2','stripRow3'];
+  rows.forEach((id, ri) => {
+    const el = document.getElementById(id);
+    for (let i=0;i<12;i++){
+      const b = document.createElement('div');
+      b.className = 'bit';
+      b.textContent = Math.round(Math.random());
+      el.appendChild(b);
+    }
+  });
+  function tick(){
+    rows.forEach(id => {
+      const el = document.getElementById(id);
+      [...el.children].forEach(b => {
+        if (Math.random() < 0.35){
+          const v = Math.round(Math.random());
+          b.textContent = v;
+          b.className = 'bit' + (v==1 ? (Math.random()<0.5?' on':' alt') : '');
+        }
+      });
+    });
+  }
+  setInterval(tick, 900);
+</script>
+</body>
+</html>

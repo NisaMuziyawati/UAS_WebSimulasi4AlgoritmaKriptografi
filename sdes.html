@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Simplified — Data Encryption Standard</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<div class="bitfield"></div>
+
+<div class="topbar">
+  <a href="index.html" class="brand">
+    <span class="mark">CL</span>
+    <span>CryptoLab<small>Kriptografi Simetris — UAS</small></span>
+  </a>
+  <nav class="navlinks">
+    <a href="index.html">Beranda</a>
+    <a href="des.html">DES</a>
+    <a href="sdes.html" class="active">S-DES</a>
+    <a href="aes.html">AES</a>
+    <a href="saes.html">S-AES</a>
+  </nav>
+</div>
+
+<main>
+  <div class="module-hero">
+    <div>
+      <span class="module-badge" style="--accent:var(--cyan)">Simplified DES</span>
+      <h1>S-DES Calculator</h1>
+      <p>Masukkan 8-bit plaintext/ciphertext dan 10-bit key. S-DES memakai 2 ronde fungsi fk dengan
+      S-Box S0 dan S1 4×4, diselingi fungsi Switch (SW).</p>
+    </div>
+  </div>
+
+  <div class="workbench">
+    <!-- input panel -->
+    <div class="panel">
+      <h4>Input</h4>
+      <div class="mode-toggle" id="modeToggle">
+        <button data-mode="enc" class="active">Enkripsi</button>
+        <button data-mode="dec">Dekripsi</button>
+      </div>
+      <div class="spacer"></div>
+
+      <div class="field">
+        <label id="textLabel">Plaintext (8-bit)</label>
+        <input type="text" id="textInput" placeholder="cth: 01110010 atau 72 (hex)">
+        <div class="errmsg" id="textErr"></div>
+        <div class="hint">Terima biner 8-bit atau hex 2-digit.</div>
+      </div>
+
+      <div class="field">
+        <label>Key (10-bit)</label>
+        <input type="text" id="keyInput" placeholder="cth: 1010000010">
+        <div class="errmsg" id="keyErr"></div>
+        <div class="hint">Hanya menerima biner 10-bit.</div>
+      </div>
+
+      <div class="actions-row">
+        <button class="btn btn-primary btn-block" id="submitBtn">Submit</button>
+        <button class="btn btn-ghost" id="resetBtn">Reset</button>
+      </div>
+    </div>
+
+    <!-- output -->
+    <div>
+      <div class="result-panel" id="resultPanel">
+        <span class="label" id="resultLabel">Ciphertext</span>
+        <div class="value" id="resultValue">--------</div>
+        <div class="subvalue" id="resultHex"></div>
+        <div class="subkeys" id="subkeysRow"></div>
+      </div>
+
+      <button class="solution-toggle" id="solutionToggle">
+        <span class="label">Tampilkan Solusi Penyelesaian</span>
+        <span class="chev">&#9662;</span>
+      </button>
+      <div class="solution-body" id="solutionBody">
+        <div id="stepsMount"></div>
+      </div>
+
+      <div class="empty-state" id="emptyState">
+        <div class="glyph">01</div>
+        Masukkan plaintext/ciphertext dan key, lalu tekan <b>Submit</b> untuk melihat hasil dan
+        penyelesaian lengkap.
+      </div>
+    </div>
+  </div>
+</main>
+
+<div class="footer">Nisa Muziyawati · Teknik Informatika 6B · 2026 · Universitas Bale Bandung (UNIBBA)</div>
+
+<script src="js/common.js"></script>
+<script src="js/sdes.js"></script>
+<script>
+  let mode = 'enc';
+  wireModePane('#modeToggle', (m) => {
+    mode = m;
+    document.getElementById('textLabel').textContent = m === 'enc' ? 'Plaintext (8-bit)' : 'Ciphertext (8-bit)';
+    document.getElementById('resultLabel').textContent = m === 'enc' ? 'Ciphertext' : 'Plaintext';
+  });
+  wireSolutionToggle('solutionToggle','solutionBody');
+
+  document.getElementById('resetBtn').addEventListener('click', () => {
+    document.getElementById('textInput').value = '';
+    document.getElementById('keyInput').value = '';
+    document.getElementById('resultPanel').classList.remove('show');
+    document.getElementById('solutionBody').classList.remove('open');
+    document.getElementById('solutionToggle').classList.remove('open');
+    document.getElementById('emptyState').style.display = 'block';
+    showFieldError(document.getElementById('textInput'), document.getElementById('textErr'), '');
+    showFieldError(document.getElementById('keyInput'), document.getElementById('keyErr'), '');
+  });
+
+  document.getElementById('submitBtn').addEventListener('click', () => {
+    const textEl = document.getElementById('textInput');
+    const keyEl = document.getElementById('keyInput');
+    const bits8 = CL.toBits(textEl.value, 8);
+    const bits10 = CL.toBits(keyEl.value, 10);
+
+    showFieldError(textEl, document.getElementById('textErr'), bits8 ? '' : 'Harus 8-bit biner atau 2-digit hex.');
+    showFieldError(keyEl, document.getElementById('keyErr'), bits10 ? '' : 'Harus 10-bit biner.');
+    if (!bits8 || !bits10) return;
+
+    const r = SDES.run(bits8, bits10, mode);
+
+    document.getElementById('emptyState').style.display = 'none';
+    document.getElementById('resultPanel').classList.add('show');
+    document.getElementById('resultValue').textContent = r.output;
+    document.getElementById('resultHex').textContent = 'Hex: ' + CL.binToHex(r.output);
+    document.getElementById('subkeysRow').innerHTML =
+      `<div class="subkey-chip">K1 = ${r.K1}</div><div class="subkey-chip">K2 = ${r.K2}</div>`;
+
+    StepRenderer.render(r.steps, document.getElementById('stepsMount'));
+  });
+</script>
+</body>
+</html>
