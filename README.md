@@ -1,4 +1,4 @@
-# CryptoLab — Web Simulasi Algoritma Kriptografi (DES · S-DES · AES · S-AES)
+# CryptoLab — Web Simulasi 4 Algoritma Kriptografi (DES · S-DES · AES · S-AES)
 
 Aplikasi web untuk mensimulasikan empat algoritma enkripsi-dekripsi simetris — **DES**, **S-DES**, **AES-128**,
 dan **S-AES** — lengkap dengan penjabaran proses perhitungan langkah demi langkah (key generation,
