@@ -89,7 +89,7 @@ Keempat *engine* di folder `js/` telah diuji terhadap test vector standar sebelu
 |---|---|---|---|
 | DES  | `0123456789ABCDEF` | `133457799BBCDFF1` | `85E813540F0AB405` |
 | S-DES | `10101010` | `1010000010` | `10001101` |
-| AES-128 | `00112233445566778899AABBCCDDEEFF` | `00102030405060708090A0B0C0D0E0F` | `B4CAAFD63B02AF23659087641387BC0E` |
+| AES-128 | `00112233445566778899AABBCCDDEEFF` | `00102030405060708090A0B0C0D0E0F0` | `B4CAAFD63B02AF23659087641387BC0E` |
 | S-AES | `1101011100101000` | `0100101011110101` | `0010010011101100` |
 
 Nilai-nilai di atas sesuai dengan contoh baku pada literatur (Stallings — *Cryptography and Network
@@ -105,6 +105,9 @@ ketentuan pada soal UAS.
 ## 👤 Identitas
 
 Nama : `[ Nisa Muziyawati ]`
+
 NIM  : `[ 301230045 ]`
+
 Mata Kuliah : Kriptografi
+
 Perancangan dan Implementasi Web Simulasi 4 Algoritma Kriptografi: DES, S-DES, AES, dan S-AES
